@@ -1,10 +1,106 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/core/utils/assets.dart';
+import 'package:graduation_project/features/OnBoarding/data/models/onboarding_item.dart';
+import 'package:graduation_project/features/OnBoarding/presentaion/Views/widgets/onboarding_indicator.dart';
+import 'package:graduation_project/features/OnBoarding/presentaion/Views/widgets/onboarding_page.dart';
 
-class OnBoardingView extends StatelessWidget {
-  const OnBoardingView({super.key});
+class OnboardingScreen extends StatefulWidget {
+  @override
+  _OnboardingScreenState createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final PageController _pageController = PageController(initialPage: 0);
+  int _currentPage = 0;
+
+  final List<OnboardingItem> _onboardingItems = [
+    OnboardingItem(
+      title: "Track Your Goal",
+      descreption:
+          "Do not worry if you have trouble determining your goals. We can help you determine your goals and track your goals.",
+      imagePath: AssetsData.track,
+    ),
+    OnboardingItem(
+      title: "Get Burn",
+      descreption:
+          "Keep burning, to achieve your goals, it hurts only temporarily. If you give up now you will be in pain forever.",
+      imagePath: AssetsData.gett,
+    ),
+    OnboardingItem(
+      title: "Eat Well",
+      descreption:
+          " Start a healthy lifestyle with us, we can determine your diet every day. Facility eating is fun.",
+      imagePath: AssetsData.eat,
+    ),
+    OnboardingItem(
+      title: "Improve Sleep Quality",
+      descreption:
+          "Improve the quality of your sleep with us, good quality sleep can bring a good mood in the morning.",
+      imagePath: "assets/images/improve.png",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: _onboardingItems.length,
+              onPageChanged: (int page) {
+                setState(() {
+                  _currentPage = page;
+                });
+              },
+              itemBuilder: (context, index) {
+                return OnboardingPage(
+                  item: _onboardingItems[index],
+                );
+              },
+            ),
+          ),
+          OnboardingIndicator(
+            currentPage: _currentPage,
+            pageCount: _onboardingItems.length,
+          ),
+          _buildArrowButton(), // Updated arrow button
+        ],
+      ),
+    );
+  }
+
+  Widget _buildArrowButton() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Align(
+        alignment: Alignment.centerRight, // Align arrow to the right
+        child: GestureDetector(
+          onTap: () {
+            if (_currentPage < _onboardingItems.length - 1) {
+              _pageController.nextPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              );
+            } else {
+              // Navigate to the next screen (e.g., home screen)
+              print("Onboarding completed!");
+            }
+          },
+          child: Image.asset(
+            AssetsData.arrow,
+            width: 60,
+            height: 60,
+          ),
+        ),
+      ),
+    );
   }
 }

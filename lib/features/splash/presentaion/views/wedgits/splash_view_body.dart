@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/core/utils/assets.dart';
 import 'package:graduation_project/features/OnBoarding/presentaion/Views/on_Boarding_view.dart';
 import 'package:graduation_project/features/splash/presentaion/views/wedgits/sliding_text.dart';
@@ -20,8 +21,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void initState() {
     super.initState();
     InitSlidingAnimation();
-    Future.delayed(Duration(seconds: 3), () {
-      Get.to(() => const OnBoardingView(),
+    Future.delayed(const Duration(seconds: 3), () {
+      Get.to(() => OnboardingScreen(),
           transition: Transition.fade, duration: kTranstionDuration);
     });
   }

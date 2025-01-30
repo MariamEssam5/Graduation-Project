@@ -17,7 +17,7 @@ class SlidingText extends StatelessWidget {
             position: slidingAnimation,
             child: const Text(
               "FitFork",
-              style: TextStyle(fontSize: 24),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           );
