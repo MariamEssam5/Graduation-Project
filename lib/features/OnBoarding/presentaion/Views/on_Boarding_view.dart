@@ -3,6 +3,7 @@ import 'package:graduation_project/core/utils/assets.dart';
 import 'package:graduation_project/features/OnBoarding/data/models/onboarding_item.dart';
 import 'package:graduation_project/features/OnBoarding/presentaion/Views/widgets/onboarding_indicator.dart';
 import 'package:graduation_project/features/OnBoarding/presentaion/Views/widgets/onboarding_page.dart';
+import 'package:graduation_project/features/Register/presentation/views/register_screen1.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -71,7 +72,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             currentPage: _currentPage,
             pageCount: _onboardingItems.length,
           ),
-          _buildArrowButton(), // Updated arrow button
+          _buildArrowButton(),
         ],
       ),
     );
@@ -81,7 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Align(
-        alignment: Alignment.centerRight, // Align arrow to the right
+        alignment: Alignment.centerRight,
         child: GestureDetector(
           onTap: () {
             if (_currentPage < _onboardingItems.length - 1) {
@@ -90,8 +91,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 curve: Curves.easeInOut,
               );
             } else {
-              // Navigate to the next screen (e.g., home screen)
-              print("Onboarding completed!");
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RegisterScreen1(),
+                ),
+              );
             }
           },
           child: Image.asset(

@@ -5,4 +5,8 @@ class AssetsData {
   static const eat = 'assets/images/eat.png';
   static const track = 'assets/images/track.png';
   static const arrow = 'assets/images/arrow.png';
+  static const reg2 = 'assets/images/reg2.png';
+  static const reg31 = 'assets/images/reg31.png';
+  static const reg32 = 'assets/images/reg32.png';
+  static const reg33 = 'assets/images/reg33.png';
 }
